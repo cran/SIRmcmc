@@ -1,0 +1,17 @@
+40dc168afdc207b16b6898a4ecbbd838 *DESCRIPTION
+3e44c084e3c327dbe9f71698333390fb *NAMESPACE
+f905c578863d1ef5af3e8854492fcd0a *R/MCMC.functions.R
+f8d972e46e59bb382d881407146f9892 *R/RcppExports.R
+badf0d7c3f241d5472d550a2412bc97d *data/hh.transmission.RData
+89d81b0b9d5e0d8092fe05150f8d6ae7 *data/hh.transmission.epsilon.RData
+af9f6f835113181e1499006d3958f3bf *inst/CITATION
+9a432a76ed94a52a17934f5add25b8e1 *man/MCMC.date.Rd
+6f899951a1aa3377df4bd2e60e5a365e *man/community.attack.rate.Rd
+660dda89d3bec5093bbe383075ce42ae *man/hh.transmission.Rd
+fbc812d1e628bed595f2e7d8d6f0606b *man/hh.transmission.epsilon.Rd
+0a8f738b2775e4dd005aeb4097e27e64 *man/household.transmission.Rd
+206903a84c90e102728c8855d9845736 *man/prior.Rd
+5249c99a6c41035932f563e489a0ea36 *man/secondary.attack.rate.Rd
+beebd0a004d2abcc60406d9f44f73ef1 *man/unifprior.Rd
+2b47afc383fd3d16bb1d904053e0e706 *src/MCMC.functions.cpp
+277492c425d78f9ff50ebdb065fdb51b *src/RcppExports.cpp

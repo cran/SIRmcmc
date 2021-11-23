@@ -1,0 +1,5 @@
+useDynLib(SIRmcmc, .registration=TRUE)
+export("household.transmission","prior","unifprior","community.attack.rate","secondary.attack.rate","MCMC.date")
+importFrom("Rcpp", "evalCpp")
+importFrom("graphics", "par", "plot", "plot.default")
+importFrom("stats", "dgamma", "dlogis", "loess", "quantile", "rbinom","rnorm", "runif")
