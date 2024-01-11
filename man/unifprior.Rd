@@ -36,6 +36,6 @@ unifprior(alpha, beta, gamma, epsilon, esteps, UB = 1000, LB = 0.01)
 \seealso{
   \code{\link{dlogis}}
   \code{\link{dgamma}}
-  \code{\link{household.transmission}}
+  \code{\link{household_transmission}}
   \code{\link{prior}}
 }

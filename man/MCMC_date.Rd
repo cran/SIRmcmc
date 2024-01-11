@@ -1,16 +1,16 @@
-\name{MCMC.date}
-\alias{MCMC.date}
+\name{MCMC_date}
+\alias{MCMC_date}
 \title{Convert dates to a list of extendend natural numbers.}
 \description{Converts dates to a list of numbers representing the number
 of days from the start of followup until the start of the infectious period.}
 \usage{
-MCMC.date(dates,start.date=NULL)
+MCMC_date(dates,start_date=NULL)
 }
 \arguments{
   \item{dates}{
     A list of dates. May be of character, numeric, or date class.
   }
-  \item{start.date}{
+  \item{start_date}{
     The start date of follow up
   }
 }

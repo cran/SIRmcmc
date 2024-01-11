@@ -35,5 +35,5 @@ prior(alpha, beta, gamma, epsilon, esteps, params = list(alpha =
 \seealso{
   \code{\link{dlogis}}
   \code{\link{dgamma}}
-  \code{\link{household.transmission}}
+  \code{\link{household_transmission}}
 }

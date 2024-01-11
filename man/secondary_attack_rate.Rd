@@ -1,18 +1,18 @@
-\name{secondary.attack.rate}
-\alias{secondary.attack.rate}
+\name{secondary_attack_rate}
+\alias{secondary_attack_rate}
 \title{Compute the secondary attack rate}
 \description{Using the value of a call to
-  \code{\link{household.transmission}}, computes the secondary attack
+  \code{\link{household_transmission}}, computes the secondary attack
   rate for households.}
 \usage{
-secondary.attack.rate(household.size,SIRmcmc,probs=c(0.5,0.025,0.975))
+secondary_attack_rate(household_size,SIRmcmc,probs=c(0.5,0.025,0.975))
 }
 \arguments{
-  \item{household.size}{
+  \item{household_size}{
     A numeric vector containing the number of people in a household.
   }
   \item{SIRmcmc}{
-    The value of a call to \code{\link{household.transmission}}.
+    The value of a call to \code{\link{household_transmission}}.
   }
   \item{probs}{
     A numeric vector of the quantiles of the posterior distribution. The

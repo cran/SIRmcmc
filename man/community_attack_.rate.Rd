@@ -1,15 +1,15 @@
-\name{community.attack.rate}
-\alias{community.attack.rate}
+\name{community_attack_rate}
+\alias{community_attack_rate}
 \title{Compute the community attack rate}
 \description{Computes the community attack rate for a a cohort using the
-  value of a call to \code{\link{household.transmission}}.
+  value of a call to \code{\link{household_transmission}}.
 }
 \usage{
-community.attack.rate(SIRmcmc,probs=c(0.5,0.025,0.975))
+community_attack_rate(SIRmcmc,probs=c(0.5,0.025,0.975))
 }
 \arguments{
   \item{SIRmcmc}{
-    The value of a call to \code{\link{household.transmission}}.
+    The value of a call to \code{\link{household_transmission}}.
   }
   \item{probs}{
     A numeric vector of the quantiles of the posterior distribution. The

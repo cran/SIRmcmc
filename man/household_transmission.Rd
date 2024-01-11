@@ -1,32 +1,32 @@
-\name{household.transmission}
-\alias{household.transmission}
+\name{household_transmission}
+\alias{household_transmission}
 \title{Estimate parameters from SIR model}
 \description{Use the Metropolis algorithm to estimate parameters from
   the SIR compartmental model}
 \usage{
-household.transmission(onset.date, household.index, covariate = NULL,
-                       followup.time, iterations,
-                       delta = c(0.1,0.3,0.4,0.1), plot.chain = TRUE,
-                       index = 1, start.date = NULL, prior = unifprior,
-                       constant.hazard = FALSE,...)
+household_transmission(onset_date, household_index, covariate = NULL,
+                       followup_time, iterations,
+                       delta = c(0.1,0.3,0.4,0.1), plot_chain = TRUE,
+                       index = 1, start_date = NULL, prior = unifprior,
+                       constant_hazard = FALSE,...)
 }
 \arguments{
-  \item{onset.date}{
-    A vector of onset dates. If onset.date is a character vector,
+  \item{onset_date}{
+    A vector of onset dates. If onset_date is a character vector,
     then it will be coerced to dates using
     \code{\link{as.Date}}. \code{NA} values are interpretted as remaining
     susceptible at the end of followup.
   }
-  \item{household.index}{
+  \item{household_index}{
     A vector identifying households, which should be
-    the same length as the onset.date argument.
+    the same length as the onset_date argument.
   }
   \item{covariate}{
     A vector identifying covariate patterns. If given, then it is
     interpretted as a factor. A value for epsilon will be given for each
     level of covariate. If \code{NULL}, then epsilon is not estimated.
   }
-  \item{followup.time}{
+  \item{followup_time}{
     An integer for the followup time in days.
   }
   \item{iterations}{
@@ -37,17 +37,17 @@ household.transmission(onset.date, household.index, covariate = NULL,
     Metropolis algorithm. The order is (1) alpha, (2) beta, (3) gamma,
     and (4) epsilon.
   }
-  \item{plot.chain}{
+  \item{plot_chain}{
     A boolean of whether to plot the value of the chain vs the iterate.
   }
   \item{index}{
     An integer for the index date. Probabilities are conditional on the
-    index date.  Any coordinates of onset.date equal
+    index date.  Any coordinates of onset_date equal
     to index will have a likelihood of 1. If you want unconditional
-    probabilities, then index should be less than start.date.
+    probabilities, then index should be less than start_date.
   }
-  \item{start.date}{
-    Should be the same format as onset.date. Specifies the start of the
+  \item{start_date}{
+    Should be the same format as onset_date. Specifies the start of the
     followup period.
   }
   \item{prior}{
@@ -56,7 +56,7 @@ household.transmission(onset.date, household.index, covariate = NULL,
     alpha, beta, gamma, epsilon, and esteps. Builtin functions are
     unifprior and \code{\link{prior}}. unifprior is uniform on (0.01,1000).
   }
-  \item{constant.hazard}{
+  \item{constant_hazard}{
     If \code{FALSE}, then the algorithm computes a time dependent hazard
     for the cohort and the hazard from the community is proportional to
     the hazard in the cohort. If \code{TRUE}, then the algorithm assumes a
@@ -78,8 +78,8 @@ household.transmission(onset.date, household.index, covariate = NULL,
   gamma. If covariates are supplied, the additional parameters,
   collectively called epsilon, are also estimated.
 
-  The algorithm assumes followup begins on start.date and lasts for
-  followup.time days. Any coordinate of onset.date equal to index does
+  The algorithm assumes followup begins on start_date and lasts for
+  followup_time days. Any coordinate of onset_date equal to index does
   not contribute to the likelihood.
 
   Two priors are builtin: \code{\link{prior}} and
@@ -92,10 +92,10 @@ household.transmission(onset.date, household.index, covariate = NULL,
 library(graphics)
 onset<-sample(c(seq(1,10),rep(Inf,20)),size=500,replace=TRUE)
 hh<-sample(seq(1,300),size=500,replace=TRUE)
-chain<-household.transmission(onset.date = onset, household.index = hh,
-                              followup.time = 10, iterations = 100)
-community.attack.rate(SIRmcmc=chain)
-secondary.attack.rate(household.size=3,SIRmcmc=chain)
+chain<-household_transmission(onset_date = onset, household_index = hh,
+                              followup_time = 10, iterations = 100)
+community_attack_rate(SIRmcmc=chain)
+secondary_attack_rate(household_size=3,SIRmcmc=chain)
 
 ##An example with household transmission---------------------------------
 library(graphics)
@@ -106,30 +106,30 @@ T<-30
 delta<-c(0.1,0.6,0.8)
 index<-0
 ##Find the MCMC estimates of alpha, beta, and gamma
-chain<-household.transmission(
-    onset.date=hh.transmission$onset,
-    household.index=hh.transmission$household,
+chain<-household_transmission(
+    onset_date=hh.transmission$onset,
+    household_index=hh.transmission$household,
     covariate=NULL,
-    followup.time=T,
+    followup_time=T,
     iterations=iterations,
     delta=delta,
     prior=unifprior,
     index=index
 )
 #Tabulate true type of transmission
-hh.table<-table(
+hh_table<-table(
     table(
-        is.finite(MCMC.date(hh.transmission$onset)),
+        is.finite(MCMC_date(hh.transmission$onset)),
         hh.transmission$household)["TRUE",]
 )
 ##Calculate the true SAR
-truth.table<-table(hh.transmission$transmission)
-truth<-unname(truth.table["Household"]/sum(hh.table[2:3]))
+truth_table<-table(hh.transmission$transmission)
+truth<-unname(truth_table["Household"]/sum(hh_table[2:3]))
 cat("\n\nTrue Value of SAR\n\n")
 print(truth)
 ##Find point and 95\% central creditable intervals for MCMC SAR
 cat("\n\nMCMC Estimate of SAR\n\n")
-secondary.attack.rate(household.size=2,SIRmcmc=chain)
+secondary_attack_rate(household_size=2,SIRmcmc=chain)
 days<-NULL
 for(d in c(seq(1:5))){
     days<-c(days,as.character(d))
@@ -143,9 +143,9 @@ for(d in c(seq(1:5))){
     )
     ##Find point and 95\% confidence intervals for normal approx to SAR
     print(
-        a/sum(hh.table[2:3])+c(p=0,LB=-1,UB=1) *
+        a/sum(hh_table[2:3])+c(p=0,LB=-1,UB=1) *
         qnorm(p=0.975) *
-        sqrt(a*(hh.table[2]+hh.table[3]-a)/(hh.table[2]+hh.table[3])^3)
+        sqrt(a*(hh_table[2]+hh_table[3]-a)/(hh_table[2]+hh_table[3])^3)
     )
 }
 
@@ -160,11 +160,11 @@ for(d in c(seq(1:5))){
     delta<-c(0.1,0.1,0.1,0.1)
     index<-0
     ##Find the MCMC estimates of alpha, beta, gamma, and epsilon
-    chain<-household.transmission(
-        onset.date=hh.transmission.epsilon$onset,
-        household.index=hh.transmission.epsilon$household,
+    chain<-household_transmission(
+        onset_date=hh.transmission.epsilon$onset,
+        household_index=hh.transmission.epsilon$household,
         covariate=hh.transmission.epsilon$epsilon,
-        followup.time=T,
+        followup_time=T,
         iterations=iterations,
         delta=delta,
         prior=unifprior,
@@ -173,19 +173,19 @@ for(d in c(seq(1:5))){
 
     ##Find point and 95\% central creditable intervals for MCMC SAR
     cat("\n\nMCMC Estimate of SAR\n\n")
-    print(secondary.attack.rate(household.size=2,SIRmcmc=chain))
+    print(secondary_attack_rate(household_size=2,SIRmcmc=chain))
     for(e in c(1,5)){
-        hh.table<-table(table(
-            is.finite(MCMC.date(hh.transmission.epsilon$onset)),
+        hh_table<-table(table(
+            is.finite(MCMC_date(hh.transmission.epsilon$onset)),
             hh.transmission.epsilon$household,
             hh.transmission.epsilon$epsilon)["TRUE",,as.character(e)])
         ##Tabulate true type of transmission
-        truth.table<-table(
+        truth_table<-table(
             hh.transmission.epsilon$transmission[which(
                 hh.transmission.epsilon$epsilon==e
             )])
         ##Calculate the true SAR
-        truth<-unname(truth.table["Household"]/sum(hh.table[2:3]))
+        truth<-unname(truth_table["Household"]/sum(hh_table[2:3]))
         cat("\n\nTrue Value of SAR\n\n")
         print(truth)
         days<-NULL
@@ -202,9 +202,9 @@ for(d in c(seq(1:5))){
                 " Day Counting Estimate of SAR\n\n"
             ))
             print(
-                a/sum(hh.table[2:3])+c(p=0,LB=-1,UB=1)
+                a/sum(hh_table[2:3])+c(p=0,LB=-1,UB=1)
                 * qnorm(p=0.975)
-                * sqrt(a*(hh.table[2]+hh.table[3]-a)/(hh.table[2]+hh.table[3])^3)
+                * sqrt(a*(hh_table[2]+hh_table[3]-a)/(hh_table[2]+hh_table[3])^3)
             )
         }
     }
